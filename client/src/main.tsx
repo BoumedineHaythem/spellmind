@@ -14,6 +14,12 @@ const redirectToLoginIfUnauthorized = (error: unknown) => {
   if (!(error instanceof TRPCClientError)) return;
   if (typeof window === "undefined") return;
 
+  // Prevent infinite redirect loops if the user is already on the login or register pages
+  const currentPath = window.location.pathname;
+  if (currentPath === "/login" || currentPath === "/register") {
+    return;
+  }
+
   const isUnauthorized = error.message === UNAUTHED_ERR_MSG;
 
   if (!isUnauthorized) return;
@@ -45,7 +51,7 @@ const trpcClient = trpc.createClient({
       fetch(input, init) {
         return globalThis.fetch(input, {
           ...(init ?? {}),
-          credentials: "include",
+          credentials: "include", // Essential for sharing cookies locally with your server
         });
       },
     }),

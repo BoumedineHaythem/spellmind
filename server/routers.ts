@@ -20,7 +20,7 @@ export const appRouter = router({
         success: true,
       } as const;
     }),
-    login: publicProcedure
+login: publicProcedure
       .input(
         z.object({
           email: z.string().email(),
@@ -36,6 +36,12 @@ export const appRouter = router({
         const sessionToken = await sdk.createSessionToken(user.openId, {
           name: user.name || "",
         });
+
+        // Debug logs to verify what values are actually generated
+        console.log("=========================================");
+        console.log("COOKIE NAME EXPECTED:", COOKIE_NAME);
+        console.log("SESSION TOKEN GENERATED:", sessionToken);
+        console.log("=========================================");
 
         const cookieOptions = getSessionCookieOptions(ctx.req);
         ctx.res.cookie(COOKIE_NAME, sessionToken, { ...cookieOptions, maxAge: ONE_YEAR_MS });

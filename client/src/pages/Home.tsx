@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useAuth } from "@/_core/hooks/useAuth";
-import { getLoginUrl } from "@/const";
 import { Link } from "wouter";
 import { Zap, Brain, TrendingUp, Award, Users, Sparkles, ChevronRight, Star } from "lucide-react";
 import { motion } from "framer-motion";
@@ -34,12 +33,12 @@ export default function Home() {
               </Link>
             ) : (
               <>
-                <a href={getLoginUrl()}>
+                <Link href="/login">
                   <Button variant="outline">Sign In</Button>
-                </a>
-                <a href={getLoginUrl()}>
+                </Link>
+                <Link href="/login">
                   <Button className="btn-primary">Get Started</Button>
-                </a>
+                </Link>
               </>
             )}
           </div>
@@ -70,12 +69,12 @@ export default function Home() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-              <a href={getLoginUrl()}>
+              <Link href="/login">
                 <Button size="lg" className="btn-primary w-full sm:w-auto">
                   Start Free Trial
                   <ChevronRight className="w-4 h-4 ml-2" />
                 </Button>
-              </a>
+              </Link>
               <Button size="lg" variant="outline" className="w-full sm:w-auto">
                 Watch Demo
               </Button>
@@ -304,14 +303,14 @@ export default function Home() {
                       </li>
                     ))}
                   </ul>
-                  <a href={getLoginUrl()}>
+                  <Link href="/login">
                     <Button
-                      className="w-full"
+                      className="w-full cursor-pointer"
                       variant={plan.highlighted ? "default" : "outline"}
                     >
                       {plan.cta}
                     </Button>
-                  </a>
+                  </Link>
                 </Card>
               </motion.div>
             ))}
@@ -434,12 +433,12 @@ export default function Home() {
               Join thousands of learners improving their spelling skills every day
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href={getLoginUrl()}>
+              <Link href="/login">
                 <Button size="lg" className="btn-primary w-full sm:w-auto">
                   Start Free Trial
                   <ChevronRight className="w-4 h-4 ml-2" />
                 </Button>
-              </a>
+              </Link>
               <Button size="lg" variant="outline" className="w-full sm:w-auto">
                 Learn More
               </Button>
@@ -488,7 +487,7 @@ export default function Home() {
             </div>
           </div>
           <div className="border-t border-muted pt-8 text-center text-sm text-muted-foreground">
-            <p>&copy; 2024 SpellMind AI. All rights reserved.</p>
+            <p>&copy; {new Date().getFullYear()} SpellMind AI. All rights reserved.</p>
           </div>
         </div>
       </footer>
