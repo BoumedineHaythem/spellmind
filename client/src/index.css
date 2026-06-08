@@ -1,0 +1,343 @@
+@import "tailwindcss";
+
+@theme {
+  /* Register custom colors with Tailwind v4 */
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  
+  --color-ring: hsl(var(--ring));
+  
+  --color-success: hsl(var(--success));
+  --color-success-foreground: hsl(var(--success-foreground));
+  
+  --color-warning: hsl(var(--warning));
+  --color-warning-foreground: hsl(var(--warning-foreground));
+  
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  
+  /* Gamification specific colors */
+  --color-xp-color: hsl(var(--xp-color));
+  --color-level-color: hsl(var(--level-color));
+  --color-streak-color: hsl(var(--streak-color));
+
+  /* Map the border radius scale if needed by shadcn components */
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+}
+
+@layer base {
+  :root {
+    /* Light mode colors - Modern, clean, gamified aesthetic */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 8%;
+    
+    --card: 0 0% 98%;
+    --card-foreground: 0 0% 8%;
+    
+    --primary: 217 91% 60%; /* Vibrant blue for primary actions */
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 268 85% 55%; /* Purple accent for secondary */
+    --secondary-foreground: 0 0% 100%;
+    
+    --accent: 45 93% 47%; /* Warm amber for highlights */
+    --accent-foreground: 0 0% 100%;
+    
+    --muted: 0 0% 89%;
+    --muted-foreground: 0 0% 45%;
+    
+    --border: 0 0% 89%;
+    --input: 0 0% 98%;
+    
+    --ring: 217 91% 60%;
+    --radius: 0.75rem;
+    
+    /* Gamification-specific colors */
+    --success: 142 71% 45%;
+    --success-foreground: 0 0% 100%;
+    
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --xp-color: 217 91% 60%;
+    --level-color: 268 85% 55%;
+    --streak-color: 45 93% 47%;
+  }
+
+  .dark {
+    /* Dark mode - Deep, modern aesthetic */
+    --background: 0 0% 8%;
+    --foreground: 0 0% 98%;
+    
+    --card: 0 0% 12%;
+    --card-foreground: 0 0% 98%;
+    
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 8%;
+    
+    --secondary: 268 85% 55%;
+    --secondary-foreground: 0 0% 100%;
+    
+    --accent: 45 93% 47%;
+    --accent-foreground: 0 0% 8%;
+    
+    --muted: 0 0% 25%;
+    --muted-foreground: 0 0% 65%;
+    
+    --border: 0 0% 20%;
+    --input: 0 0% 15%;
+    
+    --ring: 217 91% 60%;
+    
+    --success: 142 71% 45%;
+    --success-foreground: 0 0% 100%;
+    
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --xp-color: 217 91% 60%;
+    --level-color: 268 85% 55%;
+    --streak-color: 45 93% 47%;
+  }
+
+  * {
+    border-color: hsl(var(--border));
+  }
+
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-feature-settings: "rounding-mode" 1;
+  }
+
+  /* Typography */
+  h1 {
+    @apply text-4xl font-bold tracking-tight;
+  }
+
+  h2 {
+    @apply text-3xl font-bold tracking-tight;
+  }
+
+  h3 {
+    @apply text-2xl font-semibold;
+  }
+
+  h4 {
+    @apply text-xl font-semibold;
+  }
+
+  p {
+    @apply leading-relaxed;
+  }
+
+  /* Container customization */
+  .container {
+    @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Flex defaults */
+  .flex {
+    @apply min-w-0 min-h-0;
+  }
+
+  /* Focus ring for accessibility */
+  :focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background rounded;
+  }
+
+  /* Smooth transitions */
+  @media (prefers-reduced-motion: no-preference) {
+    * {
+      @apply transition-colors duration-200;
+    }
+  }
+}
+
+@layer components {
+  /* Button customizations */
+  .btn-primary {
+    @apply bg-primary text-primary-foreground hover:bg-primary/90 active:scale-95 transition-transform;
+  }
+
+  .btn-secondary {
+    @apply bg-secondary text-secondary-foreground hover:bg-secondary/90 active:scale-95 transition-transform;
+  }
+
+  /* Card with subtle shadow */
+  .card-elevated {
+    @apply bg-card text-card-foreground rounded-lg border shadow-sm;
+  }
+
+  /* Gamification badges */
+  .badge-xp {
+    @apply inline-flex items-center gap-1 px-3 py-1 rounded-full bg-xp-color/10 text-xp-color font-semibold text-sm;
+  }
+
+  .badge-level {
+    @apply inline-flex items-center gap-1 px-3 py-1 rounded-full bg-level-color/10 text-level-color font-semibold text-sm;
+  }
+
+  .badge-streak {
+    @apply inline-flex items-center gap-1 px-3 py-1 rounded-full bg-streak-color/10 text-streak-color font-semibold text-sm;
+  }
+
+  /* Smooth animations */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes pulse-glow {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.7;
+    }
+  }
+
+  .animate-fadeIn {
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  .animate-slideUp {
+    animation: slideUp 0.3s ease-out;
+  }
+
+  .animate-slideDown {
+    animation: slideDown 0.3s ease-out;
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+  }
+
+
+}
+
+@layer utilities {
+  /* Responsive utilities */
+  .mobile-only {
+    @apply block md:hidden;
+  }
+
+  .desktop-only {
+    @apply hidden md:block;
+  }
+
+  /* Glassmorphism effect */
+  .glass {
+    @apply bg-white/10 backdrop-blur-md border border-white/20;
+  }
+
+  .glass-dark {
+    @apply bg-black/10 backdrop-blur-md border border-black/20;
+  }
+
+  /* Gradient backgrounds */
+  .gradient-primary {
+    @apply bg-gradient-to-r from-primary to-secondary;
+  }
+
+  .gradient-accent {
+    @apply bg-gradient-to-r from-accent to-primary;
+  }
+
+  /* Text gradients */
+  .text-gradient {
+    @apply bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent;
+  }
+
+  /* Shadow utilities */
+  .shadow-sm-dark {
+    @apply shadow-sm dark:shadow-md;
+  }
+
+  /* Hover effects */
+  .hover-lift {
+    @apply transition-transform hover:-translate-y-1;
+  }
+
+  .hover-scale {
+    @apply transition-transform hover:scale-105;
+  }
+
+  /* Grid utilities */
+  .grid-auto-fit {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4;
+  }
+
+  /* Spacing utilities */
+  .space-section {
+    @apply py-12 md:py-16 lg:py-20;
+  }
+
+  .space-subsection {
+    @apply py-8 md:py-12;
+  }
+}
+
+/* Google Fonts import */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&display=swap");
+
+body {
+  font-family: "Inter", sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Poppins", sans-serif;
+}
